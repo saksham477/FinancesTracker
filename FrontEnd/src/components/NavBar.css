@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 20px;
+}
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f0f8ff;
+}
+.navbar-logo img {
+  height: 100px;
+  margin-top: -20px;
+}
+.navbar-links {
+  list-style: none;
+  gap: 30px;
+  display: flex;
+}
+.navbar-links li {
+  display: inline;
+}
+.navbar-links a {
+  text-decoration: none;
+  color: aliceblue;
+  font-size: larger;
+}
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+.Login-Register {
+  text-decoration: none;
+  color: aliceblue;
+  cursor: pointer;
+  list-style: none;
+}
+.Login-Register:hover {
+  text-decoration: underline;
+}

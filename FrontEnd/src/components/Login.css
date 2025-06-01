@@ -1,0 +1,153 @@
+.container {
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 200px;
+  padding: 30px;
+  background-color: rgb(17, 38, 66);
+  height: fit-content;
+  width: 450px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input {
+  width: 100%;
+  margin: 10px 0;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: aliceblue;
+  font-size: 1rem;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder {
+  color: rgba(240, 248, 255, 0.7);
+}
+
+input:focus {
+  background-color: rgba(255, 251, 251, 0.2);
+  box-shadow: 0 0 10px rgba(172, 120, 255, 0.5);
+}
+
+.input span {
+  cursor: pointer;
+  color: rgba(240, 248, 255, 0.8);
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.input span:hover {
+  color: rgba(240, 248, 255, 1);
+}
+
+.forgot-password {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.forgot-password span {
+  color: rgba(198, 189, 206, 0.8);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.forgot-password span:hover {
+  color: rgba(198, 189, 206, 1);
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.submit {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  background-color: rgb(129, 80, 148);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit:hover {
+  background-color: rgb(160, 100, 255);
+  transform: scale(1.05);
+}
+
+.gray {
+  background-color: gray;
+  color: black;
+}
+
+button {
+  margin-top: 10px;
+
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: aliceblue;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: scale(1.05);
+}
+.response-message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.response-message.success {
+  background-color: #28a745;
+  color: white;
+}
+
+.response-message.error {
+  color: white;
+}

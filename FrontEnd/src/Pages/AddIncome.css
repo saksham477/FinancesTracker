@@ -1,0 +1,158 @@
+/* AddIncome.css */
+.add-income-page {
+  background-color: #0f172a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.form-container {
+  background-color: #1e293b;
+  color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  position: relative;
+  color: #f8fafc;
+}
+
+.form-title:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #3b82f6;
+  border-radius: 2px;
+}
+
+.income-form {
+  margin-top: 1.5rem;
+}
+
+.income-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.income-form .form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.income-form .form-group input,
+.income-form .form-group textarea {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  outline: none;
+  background-color: #334155;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.income-form .form-group input:focus,
+.income-form .form-group textarea:focus {
+  background-color: #475569;
+  box-shadow: 0 0 0 2px #3b82f6;
+  border-color: #3b82f6;
+}
+
+.income-form .form-group input::placeholder,
+.income-form .form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.income-form .form-group input[type="date"] {
+  color: #f1f5f9;
+  cursor: pointer;
+}
+
+.income-form .form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 1.5rem;
+  }
+
+  .form-title {
+    font-size: 1.75rem;
+  }
+
+  .income-form .form-group input,
+  .income-form .form-group textarea {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* Add subtle animation for inputs */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 5px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.income-form .form-group input:focus,
+.income-form .form-group textarea:focus {
+  animation: pulse 1.5s infinite;
+}

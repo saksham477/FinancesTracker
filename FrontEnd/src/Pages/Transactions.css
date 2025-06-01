@@ -1,0 +1,292 @@
+/* Base styles and variables */
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --accent-primary: #3b82f6;
+  --income-color: #10b981;
+  --expense-color: #ef4444;
+  --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --card-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styles */
+.transactions-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.transactions-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+
+/* Summary section */
+.summary-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.summary-card h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.summary-card p {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.income-summary {
+  background: linear-gradient(
+    135deg,
+    rgba(16, 185, 129, 0.1),
+    rgba(16, 185, 129, 0.05)
+  );
+}
+
+.income-summary p {
+  color: var(--income-color);
+}
+
+.expense-summary {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1),
+    rgba(239, 68, 68, 0.05)
+  );
+}
+
+.expense-summary p {
+  color: var(--expense-color);
+}
+
+.balance-summary {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(59, 130, 246, 0.05)
+  );
+}
+
+.balance-summary p {
+  color: var(--accent-primary);
+}
+
+/* Transactions list */
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--card-radius);
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow);
+  transition: var(--transition);
+  border-left: 4px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.transaction-card:hover {
+  transform: translateX(5px);
+}
+
+.transaction-card.income {
+  border-left-color: var(--income-color);
+  background: linear-gradient(
+    to right,
+    rgba(16, 185, 129, 0.1),
+    var(--bg-secondary) 15%
+  );
+}
+
+.transaction-card.expense {
+  border-left-color: var(--expense-color);
+  background: linear-gradient(
+    to right,
+    rgba(239, 68, 68, 0.1),
+    var(--bg-secondary) 15%
+  );
+}
+
+.transaction-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-category {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.transaction-amount {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.income .transaction-amount {
+  color: var(--income-color);
+}
+
+.expense .transaction-amount {
+  color: var(--expense-color);
+}
+
+.transaction-details {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.transaction-date {
+  font-weight: 500;
+}
+
+.transaction-notes {
+  font-style: italic;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Loading and error states */
+.loading,
+.error,
+.no-transactions {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--bg-secondary);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  font-size: 1.1rem;
+}
+
+.loading {
+  position: relative;
+  color: var(--text-secondary);
+}
+
+.loading:after {
+  content: "...";
+  position: absolute;
+  width: 1em;
+  text-align: left;
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+.error {
+  color: var(--expense-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .transactions-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .transactions-container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .summary-section {
+    grid-template-columns: 1fr;
+  }
+
+  .transaction-details {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .transaction-notes {
+    max-width: 100%;
+  }
+}
+
+/* Animation for loading dots */
+@keyframes dots {
+  0%,
+  20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
