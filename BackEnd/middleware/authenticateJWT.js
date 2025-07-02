@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
-const userModel = require("../models/user");
+const User = require("../models/userModel");
 
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Verify JWT Token
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
@@ -10,38 +13,33 @@ const authenticateJWT = (req, res, next) => {
   }
 
   const token = authHeader.split(" ")[1];
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       return res
         .status(403)
         .json({ success: false, message: "Invalid or expired token" });
     }
+
     req.user = decoded;
     next();
   });
 };
-const authenticateAdmin = (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
 
-  if (!token) {
-    return res.status(401).json({ error: "Access denied. No token provided." });
-  }
-
+// Check Admin Access
+const adminCheck = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-
-    // Check if user is admin
-    if (!req.user.isAdmin) {
+    const user = await User.findById(req.user.userId);
+    if (!user || user.role !== "admin") {
       return res
         .status(403)
-        .json({ error: "Access denied. Admin privileges required." });
+        .json({ success: false, message: "Admin access required" });
     }
-
-    next(); // Proceed if user is admin
+    next();
   } catch (err) {
-    res.status(400).json({ error: "Invalid token." });
+    console.error("Admin check error:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
-module.exports = { authenticateJWT, authenticateAdmin };
+module.exports = { authenticateJWT, adminCheck };
