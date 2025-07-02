@@ -56,10 +56,13 @@ const Login = () => {
 
     try {
       if (action === "Login") {
-        const response = await axios.post("http://localhost:3000/login", {
-          email,
-          password,
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/login",
+          {
+            email,
+            password,
+          }
+        );
 
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
@@ -69,12 +72,15 @@ const Login = () => {
           navigate("/");
         }
       } else {
-        const response = await axios.post("http://localhost:3000/register", {
-          name,
-          email,
-          password,
-          role: "user",
-        });
+        const response = await axios.post(
+          "http://localhost:3000/api/auth/register",
+          {
+            name,
+            email,
+            password,
+            role: "user",
+          }
+        );
 
         if (response.data.token) {
           setResponseMessage("Registration successful! Please login");

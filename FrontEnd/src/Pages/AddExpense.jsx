@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./AddIncome.css"; // Reuse the same CSS
+import "./AddIncome.css";
 
 export default function AddExpense() {
   const [formData, setFormData] = useState({
