@@ -16,7 +16,6 @@ const TransactionManagement = () => {
           filter === "all"
             ? "http://localhost:3000/api/transactions"
             : `http://localhost:3000/api/transactions?type=${filter}`;
-
         const response = await axios.get(url, {
           headers: { Authorization: `Bearer ${token}` },
         });

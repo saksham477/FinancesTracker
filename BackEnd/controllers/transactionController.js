@@ -2,9 +2,16 @@ const transactionModel = require("../models/transactionModel.js");
 
 const getTransactions = async (req, res) => {
   try {
-    const transactions = await transactionModel.find({
-      userId: req.user.userId,
-    });
+    const { type } = req.query;
+    console.log("Query Params:", req.query);
+    // Build dynamic query
+    const query = { userId: req.user.userId };
+    if (type && type !== "all") {
+      query.type = type;
+    }
+
+    const transactions = await transactionModel.find(query).sort({ date: -1 });
+
     res.json({ success: true, data: transactions });
   } catch (err) {
     console.error("Error fetching transactions:", err);
