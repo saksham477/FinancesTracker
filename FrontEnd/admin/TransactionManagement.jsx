@@ -22,11 +22,11 @@ const TransactionManagement = () => {
         });
 
         // Ensure response.data is an array
-        if (!Array.isArray(response.data)) {
+        if (!Array.isArray(response.data.data)) {
           throw new Error("Invalid data format: expected array");
         }
 
-        setTransactions(response.data);
+        setTransactions(response.data.data);
         setError("");
       } catch (err) {
         setError(
@@ -34,7 +34,7 @@ const TransactionManagement = () => {
             err.message ||
             "Failed to load transactions"
         );
-        setTransactions([]); // Reset to empty array on error
+        setTransactions([]);
       } finally {
         setLoading(false);
       }

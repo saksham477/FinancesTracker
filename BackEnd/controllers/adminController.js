@@ -1,7 +1,8 @@
+// controllers/adminController.js
 const User = require("../models/userModel");
 const Transaction = require("../models/transactionModel");
 
-exports.getAdminStats = async (req, res) => {
+exports.getStats = async (req, res) => {
   try {
     const userCount = await User.countDocuments({ role: { $ne: "admin" } });
     const transactionCount = await Transaction.countDocuments();

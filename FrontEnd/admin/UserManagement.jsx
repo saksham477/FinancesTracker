@@ -31,7 +31,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:3000/users", {
+      const response = await axios.get("http://localhost:3000/api/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -88,7 +88,7 @@ const UserManagement = () => {
   const handleEditSubmit = async (userId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:3000/users/${userId}`, editForm, {
+      await axios.put(`http://localhost:3000/api/users/${userId}`, editForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -122,7 +122,7 @@ const UserManagement = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/users",
+        "http://localhost:3000/api/users",
         addForm,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -235,6 +235,7 @@ const UserManagement = () => {
                 <td>
                   {editingUser === user._id ? (
                     <input
+                      className="editForm"
                       type="text"
                       name="name"
                       value={editForm.name}

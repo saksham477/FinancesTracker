@@ -1,15 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const userModel = require("../models/userModel.js");
+const {
+  getUsers,
+  addUser,
+  updateUser,
+  deleteUser,
+} = require("../controllers/userController");
 
-// GET /api/users
-router.get("/api/users", async (req, res) => {
-  try {
-    const users = await userModel.find({}, "_id name email");
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch users" });
-  }
-});
+const {
+  authenticateJWT,
+  adminCheck,
+} = require("../middleware/authenticateJWT");
+
+router.get("/", authenticateJWT, adminCheck, getUsers);
+router.post("/", authenticateJWT, adminCheck, addUser);
+router.put("/:id", authenticateJWT, adminCheck, updateUser);
+router.delete("/:id", authenticateJWT, adminCheck, deleteUser);
 
 module.exports = router;

@@ -157,6 +157,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #cbd5e1;
 }
 
 .transaction-category {

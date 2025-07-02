@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/account/add-income" element={<AddIncome />} />
           <Route path="/account/add-expense" element={<AddExpense />} />
         </Route>
-        <Route path="/admin-dashboard" element={<AdminLayout />}>
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<UserManagement />} />
           <Route path="transactions" element={<TransactionManagement />} />

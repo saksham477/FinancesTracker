@@ -17,7 +17,7 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/login",
+        "http://localhost:3000/api/auth/login",
         {
           email,
           password,
@@ -34,7 +34,7 @@ const AdminLogin = () => {
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
         if (response.data.user.role === "admin") {
-          navigate("/admin-dashboard");
+          navigate("/admin");
         } else {
           setError("You do not have admin privileges");
           localStorage.clear();

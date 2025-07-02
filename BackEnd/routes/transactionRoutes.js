@@ -10,7 +10,7 @@ const { authenticateJWT } = require("../middleware/authenticateJWT.js");
 
 // Routes
 router.get("/", authenticateJWT, getTransactions);
-router.post("/", authenticateJWT, createTransaction); // Ensure this is correct
+router.post("/", authenticateJWT, createTransaction);
 router.put("/:id", authenticateJWT, updateTransaction);
 router.delete("/:id", authenticateJWT, deleteTransaction);
 
