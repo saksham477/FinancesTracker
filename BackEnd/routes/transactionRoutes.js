@@ -13,9 +13,9 @@ const {
 
 // Routes
 
-router.get("/", adminCheck, getTransactions);
-router.post("/", adminCheck, createTransaction);
-router.put("/:id", adminCheck, updateTransaction);
-router.delete("/:id", adminCheck, deleteTransaction);
+router.get("/", authenticateJWT, getTransactions);
+router.post("/", authenticateJWT, createTransaction);
+router.put("/:id", authenticateJWT, updateTransaction);
+router.delete("/:id", authenticateJWT, deleteTransaction);
 
 module.exports = router;

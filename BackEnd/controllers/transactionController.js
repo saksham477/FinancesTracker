@@ -5,14 +5,15 @@ const getTransactions = async (req, res) => {
   try {
     const { type } = req.query;
 
-    const query = { userId: req.user.userId }; // no need for mongoose.Types.ObjectId
+    const query = { userId: req.user.userId };
+    console.log(query);
 
     if (type && type !== "all") {
       query.type = type;
     }
 
     const transactions = await transactionModel
-      .find(query) // ✅ use query here
+      .find()
       .populate("userId", "name")
       .sort({ date: -1 });
 
