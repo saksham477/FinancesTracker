@@ -20,7 +20,6 @@ const TransactionManagement = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        // Ensure response.data is an array
         if (!Array.isArray(response.data.data)) {
           throw new Error("Invalid data format: expected array");
         }
@@ -95,13 +94,13 @@ const TransactionManagement = () => {
           <tbody>
             {transactions.map((transaction) => (
               <tr key={transaction._id}>
-                <td>${transaction.amount?.toFixed(2)}</td>
+                <td>NRs{transaction.amount?.toFixed(2)}</td>
                 <td className={`type-${transaction.type}`}>
                   {transaction.type}
                 </td>
                 <td>{transaction.category}</td>
                 <td>{new Date(transaction.date).toLocaleDateString()}</td>
-                <td>{transaction.userId?.name || transaction.userId}</td>
+                <td>{transaction.userId?.name}</td>
                 <td>
                   <button
                     onClick={() => handleDelete(transaction._id)}

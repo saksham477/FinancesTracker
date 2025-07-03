@@ -6,12 +6,16 @@ const {
   updateTransaction,
   deleteTransaction,
 } = require("../controllers/transactionController");
-const { authenticateJWT } = require("../middleware/authenticateJWT.js");
+const {
+  authenticateJWT,
+  adminCheck,
+} = require("../middleware/authenticateJWT.js");
 
 // Routes
-router.get("/", authenticateJWT, getTransactions);
-router.post("/", authenticateJWT, createTransaction);
-router.put("/:id", authenticateJWT, updateTransaction);
-router.delete("/:id", authenticateJWT, deleteTransaction);
+
+router.get("/", adminCheck, getTransactions);
+router.post("/", adminCheck, createTransaction);
+router.put("/:id", adminCheck, updateTransaction);
+router.delete("/:id", adminCheck, deleteTransaction);
 
 module.exports = router;

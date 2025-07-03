@@ -20,8 +20,7 @@ const authenticateJWT = (req, res, next) => {
         .status(403)
         .json({ success: false, message: "Invalid or expired token" });
     }
-
-    req.user = decoded;
+    req.user = { userId: decoded.id };
     next();
   });
 };
@@ -30,6 +29,7 @@ const authenticateJWT = (req, res, next) => {
 const adminCheck = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.userId);
+    console.log(user);
     if (!user || user.role !== "admin") {
       return res
         .status(403)

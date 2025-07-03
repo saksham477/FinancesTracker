@@ -1,16 +1,20 @@
+const { default: mongoose } = require("mongoose");
 const transactionModel = require("../models/transactionModel.js");
 
 const getTransactions = async (req, res) => {
   try {
     const { type } = req.query;
-    console.log("Query Params:", req.query);
-    // Build dynamic query
-    const query = { userId: req.user.userId };
+
+    const query = { userId: req.user.userId }; // no need for mongoose.Types.ObjectId
+
     if (type && type !== "all") {
       query.type = type;
     }
 
-    const transactions = await transactionModel.find(query).sort({ date: -1 });
+    const transactions = await transactionModel
+      .find(query) // ✅ use query here
+      .populate("userId", "name")
+      .sort({ date: -1 });
 
     res.json({ success: true, data: transactions });
   } catch (err) {
