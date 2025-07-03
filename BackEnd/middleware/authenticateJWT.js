@@ -20,7 +20,7 @@ const authenticateJWT = (req, res, next) => {
         .status(403)
         .json({ success: false, message: "Invalid or expired token" });
     }
-    req.user = { userId: decoded.id };
+    req.user = { userId: decoded.userId };
     next();
   });
 };
