@@ -1,12 +1,30 @@
 const { default: mongoose } = require("mongoose");
 const transactionModel = require("../models/transactionModel.js");
 
+const getUserTransactions = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    const transactions = await Transaction.find({ userId }).sort({ date: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: transactions,
+    });
+  } catch (error) {
+    console.error("Error fetching transactions:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error while fetching transactions",
+    });
+  }
+};
+
 const getTransactions = async (req, res) => {
   try {
     const { type } = req.query;
 
     const query = { userId: req.user.userId };
-    console.log(query);
 
     if (type && type !== "all") {
       query.type = type;
@@ -78,6 +96,7 @@ const deleteTransaction = async (req, res) => {
 };
 
 module.exports = {
+  getUserTransactions,
   getTransactions,
   createTransaction,
   updateTransaction,

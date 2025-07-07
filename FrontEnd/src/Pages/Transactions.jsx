@@ -17,11 +17,14 @@ const Transactions = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:3000/api/transactions", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/transactions/user",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch transactions");

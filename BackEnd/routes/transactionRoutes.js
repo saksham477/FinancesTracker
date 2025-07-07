@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+  getUserTransactions,
   getTransactions,
   createTransaction,
   updateTransaction,
@@ -12,8 +13,8 @@ const {
 } = require("../middleware/authenticateJWT.js");
 
 // Routes
-
-router.get("/", authenticateJWT, getTransactions);
+router.get("/users", authenticateJWT, getUserTransactions);
+router.get("/", authenticateJWT, adminCheck, getTransactions);
 router.post("/", authenticateJWT, createTransaction);
 router.put("/:id", authenticateJWT, updateTransaction);
 router.delete("/:id", authenticateJWT, deleteTransaction);

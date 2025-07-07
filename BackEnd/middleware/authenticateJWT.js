@@ -29,7 +29,7 @@ const authenticateJWT = (req, res, next) => {
 const adminCheck = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.userId);
-    console.log(user);
+    // console.log(user);
     if (!user || user.role !== "admin") {
       return res
         .status(403)
