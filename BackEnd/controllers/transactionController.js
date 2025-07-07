@@ -1,11 +1,13 @@
 const { default: mongoose } = require("mongoose");
-const transactionModel = require("../models/transactionModel.js");
+const transactionModel = require("../models/transactionModel");
 
 const getUserTransactions = async (req, res) => {
   try {
     const userId = req.user.userId;
 
-    const transactions = await Transaction.find({ userId }).sort({ date: -1 });
+    const transactions = await transactionModel
+      .find({ userId })
+      .sort({ date: -1 });
 
     res.status(200).json({
       success: true,

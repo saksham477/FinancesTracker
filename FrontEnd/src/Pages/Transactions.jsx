@@ -18,7 +18,7 @@ const Transactions = () => {
         }
 
         const response = await fetch(
-          "http://localhost:3000/api/transactions/user",
+          "http://localhost:3000/api/transactions/users",
           {
             headers: {
               Authorization: `Bearer ${token}`,

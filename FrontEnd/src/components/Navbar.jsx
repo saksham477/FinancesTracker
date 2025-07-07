@@ -26,7 +26,7 @@ const NavBar = () => {
           <Link to="/account">My Account</Link>
         </li>
         <li>
-          <Link to="/transactions">Transactions</Link>
+          <Link to="/transactions/users">Transactions</Link>
         </li>
       </ul>
       <span className="Login-Register">

@@ -32,7 +32,7 @@ export default function AddIncome() {
         return;
       }
 
-      const res = await fetch("http://localhost:3000/api/transactions", {
+      const res = await fetch("http://localhost:3000/api/transactions/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
