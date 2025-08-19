@@ -1,4 +1,3 @@
-// Auto-categorization rules for Finance Tracker
 export const categorizationRules = {
   // Entertainment keywords
   entertainment: [
@@ -44,8 +43,8 @@ export const categorizationRules = {
     "snack",
     "takeout",
     "delivery",
-    "uber eats",
-    "zomato",
+    "bhoj",
+    "foodmandu",
   ],
 
   // Transportation keywords
@@ -57,7 +56,6 @@ export const categorizationRules = {
     "bus",
     "taxi",
     "uber",
-    "ola",
     "metro",
     "train",
     "flight",
@@ -124,7 +122,6 @@ export const categorizationRules = {
     "society",
     "bill",
     "utilities",
-    "broadband",
   ],
 
   // Income keywords
@@ -162,5 +159,5 @@ export const autoCategory = (notes, type = "expense") => {
     }
   }
 
-  return ""; // Return empty string if no match found
+  return "";
 };
