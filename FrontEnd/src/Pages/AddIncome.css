@@ -8,7 +8,31 @@
   padding: 2rem;
   transition: all 0.3s ease;
 }
+.category-suggestion {
+  color: #4caf50;
+  font-size: 0.85em;
+  margin-top: 5px;
+  display: block;
+  font-style: italic;
+}
 
+.help-text {
+  color: #666;
+  font-size: 0.8em;
+  margin-top: 3px;
+  display: block;
+}
+
+.form-group textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* Highlight auto-filled category */
+.form-group input[name="category"]:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
 .form-container {
   background-color: #1e293b;
   color: #ffffff;

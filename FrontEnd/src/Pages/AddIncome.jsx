@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { autoCategory } from "../utils/categorizationRules";
 import "./AddIncome.css";
 
 export default function AddIncome() {
@@ -12,14 +13,58 @@ export default function AddIncome() {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  // Auto-categorize when notes change
+  useEffect(() => {
+    if (formData.notes && !formData.category) {
+      const suggestedCategory = autoCategory(formData.notes, "income");
+      if (suggestedCategory) {
+        setFormData((prev) => ({ ...prev, category: suggestedCategory }));
+      }
+    }
+  }, [formData.notes, formData.category]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // If category is being manually changed, update it
+    if (name === "category") {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      return;
+    }
+
+    // If notes are being changed, auto-suggest category
+    if (name === "notes") {
+      const suggestedCategory = autoCategory(value, "income");
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        // Only auto-set category if it's currently empty or was auto-suggested
+        category:
+          !prev.category || prev.category === autoCategory(prev.notes, "income")
+            ? suggestedCategory || prev.category
+            : prev.category,
+      }));
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.amount || !formData.category || !formData.date) {
       alert("Please fill in all required fields.");
+      return;
+    }
+
+    if (formData.amount <= 0) {
+      alert("Amount must be a positive value.");
+      return;
+    }
+
+    if (new Date(formData.date) > new Date()) {
+      alert("Date cannot be in the future.");
       return;
     }
 
@@ -32,7 +77,7 @@ export default function AddIncome() {
         return;
       }
 
-      const res = await fetch("http://localhost:3000/api/transactions/users", {
+      const res = await fetch("http://localhost:3000/api/transactions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,15 +91,6 @@ export default function AddIncome() {
       });
 
       const data = await res.json();
-      if (formData.amount <= 0) {
-        alert("Amount must be a positive value.");
-        return;
-      }
-
-      if (new Date(formData.date) > new Date()) {
-        alert("Date cannot be in the future.");
-        return;
-      }
 
       if (res.ok) {
         alert("Income added successfully!");
@@ -85,6 +121,21 @@ export default function AddIncome() {
           </div>
 
           <div className="form-group">
+            <label>Notes (optional)</label>
+            <textarea
+              name="notes"
+              value={formData.notes}
+              onChange={handleChange}
+              placeholder="e.g., movie ticket, salary payment, freelance project"
+            ></textarea>
+            {formData.notes && autoCategory(formData.notes, "income") && (
+              <small className="category-suggestion">
+                💡 Auto-suggested category based on your notes
+              </small>
+            )}
+          </div>
+
+          <div className="form-group">
             <label>Category</label>
             <input
               type="text"
@@ -94,6 +145,9 @@ export default function AddIncome() {
               placeholder="e.g., Salary, Freelance"
               required
             />
+            <small className="help-text">
+              Category is auto-filled based on your notes, but you can edit it
+            </small>
           </div>
 
           <div className="form-group">
@@ -105,15 +159,6 @@ export default function AddIncome() {
               onChange={handleChange}
               required
             />
-          </div>
-
-          <div className="form-group">
-            <label>Notes (optional)</label>
-            <textarea
-              name="notes"
-              value={formData.notes}
-              onChange={handleChange}
-            ></textarea>
           </div>
 
           <button type="submit" className="submit-button">
